@@ -12,7 +12,7 @@ ext {
 
     android = [
             applicationId    : "com.alticor.amwaychina.amwaynews",
-            compileSdkVersion: 28,
+            compileSdkVersion: 29,
             minSdkVersion    : 20,
             targetSdkVersion : 29,
             versionCode      : 20180103,

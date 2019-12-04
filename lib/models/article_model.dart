@@ -11,16 +11,16 @@ class ArticleModel extends ContentModelBase {
   final int aboReadOnly;
   final int allowShare;
   final List<String> metatagAllowidentities;
-  final String metatagPublishdate;
 
   ArticleModel({
-    id,
-    title,
-    strippedContent,
-    searchType,
-    host,
-    url,
-    metatagKeywords,
+    String id,
+    String title,
+    String strippedContent,
+    String searchType,
+    String host,
+    String url,
+    List<String> metatagKeywords,
+    String metatagPublishdate,
     // this.metatagSearchtitle,
     this.description,
     this.metatagThumbnail,
@@ -28,7 +28,6 @@ class ArticleModel extends ContentModelBase {
     this.aboReadOnly,
     this.allowShare,
     this.metatagAllowidentities,
-    this.metatagPublishdate,
   }) : super(
           id: id,
           title: title,
@@ -37,6 +36,7 @@ class ArticleModel extends ContentModelBase {
           host: host,
           url: url,
           metatagKeywords: metatagKeywords,
+          metatagPublishdate: metatagPublishdate,
         );
 
   @override
@@ -72,12 +72,12 @@ class ArticleModel extends ContentModelBase {
       url: map['Url'],
       description: map['Description'],
       metatagThumbnail: map['Thumbnail'],
-      metatagKeywords: map['Keywords'].cast<String>(),
+      metatagKeywords: [map['Keywords']],
       contentTag: map['ContentTag'],
       aboReadOnly: map['AboReadOnly'],
       allowShare: map['AllowShare'],
-      metatagAllowidentities: map['Allowidentities']?.cast<String>(),
-      metatagPublishdate: map['Publishdate'],
+      metatagAllowidentities: [map['AllowIdentities']],
+      metatagPublishdate: map['PublishDate'],
     );
   }
 
@@ -109,11 +109,13 @@ class ArticleModel extends ContentModelBase {
         'Url': url,
         'Description': description,
         'Thumbnail': metatagThumbnail,
-        'Keywords': metatagKeywords.toString(),
+        'Keywords': keywords,
         'ContentTag': contentTag,
         'AboReadOnly': aboReadOnly,
         'AllowShare': allowShare,
-        'AllowIdentities': metatagAllowidentities,
+        'AllowIdentities': allowIdentities,
         'PublishDate': metatagPublishdate,
       };
+
+  String get allowIdentities => metatagAllowidentities != null && metatagAllowidentities.isNotEmpty ? metatagAllowidentities.first : null;
 }

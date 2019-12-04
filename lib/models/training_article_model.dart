@@ -4,20 +4,20 @@ class TrainingArticleModel extends ArticleModel {
   static const String ContentType = 'training';
 
   TrainingArticleModel({
-    id,
-    title,
-    strippedContent,
-    searchType,
-    host,
-    url,
-    metatagKeywords,
-    description,
-    metatagThumbnail,
-    contentTag,
-    aboReadOnly,
-    allowShare,
-    metatagAllowidentities,
-    metatagPublishdate,
+    String id,
+    String title,
+    String strippedContent,
+    String searchType,
+    String host,
+    String url,
+    List<String> metatagKeywords,
+    String description,
+    String metatagThumbnail,
+    String contentTag,
+    int aboReadOnly,
+    int allowShare,
+    List<String> metatagAllowidentities,
+    String metatagPublishdate,
   }) : super(
           id: id,
           title: title,
@@ -34,9 +34,6 @@ class TrainingArticleModel extends ArticleModel {
           metatagAllowidentities: metatagAllowidentities,
           metatagPublishdate: metatagPublishdate,
         );
-
-  @override
-  List<Object> get props => [id];
 
   factory TrainingArticleModel.fromMap(Map<String, dynamic> map) {
     return TrainingArticleModel(
@@ -67,12 +64,12 @@ class TrainingArticleModel extends ArticleModel {
       url: map['Url'],
       description: map['Description'],
       metatagThumbnail: map['Thumbnail'],
-      metatagKeywords: map['Keywords'].cast<String>(),
+      metatagKeywords: [map['Keywords']],
       contentTag: map['ContentTag'],
       aboReadOnly: map['AboReadOnly'],
       allowShare: map['AllowShare'],
-      metatagAllowidentities: map['Allowidentities']?.cast<String>(),
-      metatagPublishdate: map['Publishdate'],
+      metatagAllowidentities: [map['Allowidentities']],
+      metatagPublishdate: map['PublishDate'],
     );
   }
 }

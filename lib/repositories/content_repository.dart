@@ -23,7 +23,7 @@ class ContentRepository {
     if (list != null && list.isNotEmpty) {
       final Map<String, dynamic> firstRow = list.first;
       if (firstRow.isNotEmpty) {
-        return (firstRow.values?.first).toString();
+        return firstRow.values?.first;
       }
     }
     return null;

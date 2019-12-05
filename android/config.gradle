@@ -1,0 +1,38 @@
+ext {
+
+    maven = [
+            version   : "1.0-SNAPSHOT",
+            group     : "com.alticor.amwaychina",
+            urlDev    : "http://10.158.194.179:32768//nexus/content/repositories/snapshots/",
+            urlRelease: "http://10.158.194.179:32768//nexus/content/repositories/releases/",
+            urlGroup  : "http://10.158.194.179:32768//nexus/content/groups/android/",
+            username  : "deployment",
+            password  : "deployment123"
+    ]
+
+    android = [
+            applicationId    : "com.alticor.amwaychina.amwaynews",
+            compileSdkVersion: 29,
+            minSdkVersion    : 20,
+            targetSdkVersion : 29,
+            versionCode      : 20180103,
+            versionName      : "3.4.2",
+    ]
+
+    dependencies = [
+            "support_v7"          : 'com.android.support:appcompat-v7:25.3.1',//support v7包
+            "support_design"      : 'com.android.support:design:25.3.1',//support design包
+            "cardview_v7"         : 'com.android.support:cardview-v7:25.3.1',
+            "design"              : 'com.android.support:design:25.3.1',
+            "okhttp3"             : 'com.squareup.okhttp3:okhttp:3.9.0',//okhttp3
+            "baseVersion"         : "3.6.9.20190412",
+            "personalVersion"     : "3.6.9.20190412"
+    ]
+
+    testdependencies = [
+            "junitVersion"              :   "4.12",
+            "androidxTestRunnerVersion" :   "1.2.0",
+            "espressoCoreVersion"       :   "3.2.0",
+    ]
+
+}

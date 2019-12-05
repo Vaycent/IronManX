@@ -8,20 +8,20 @@ class VideoArticleModel extends ArticleModel {
   final int videolength;
 
   VideoArticleModel({
-    id,
-    title,
-    strippedContent,
-    searchType,
-    host,
-    url,
-    metatagKeywords,
-    description,
-    metatagThumbnail,
-    contentTag,
-    aboReadOnly,
-    allowShare,
-    metatagAllowidentities,
-    metatagPublishdate,
+    String id,
+    String title,
+    String strippedContent,
+    String searchType,
+    String host,
+    String url,
+    List<String> metatagKeywords,
+    String description,
+    String metatagThumbnail,
+    String contentTag,
+    int aboReadOnly,
+    int allowShare,
+    List<String> metatagAllowidentities,
+    String metatagPublishdate,
     this.videoPoster,
     this.videoPath,
     this.videolength,
@@ -41,9 +41,6 @@ class VideoArticleModel extends ArticleModel {
           metatagAllowidentities: metatagAllowidentities,
           metatagPublishdate: metatagPublishdate,
         );
-
-  @override
-  List<Object> get props => [id];
 
   factory VideoArticleModel.fromMap(Map<String, dynamic> map) {
     return VideoArticleModel(
@@ -77,15 +74,15 @@ class VideoArticleModel extends ArticleModel {
       url: map['Url'],
       description: map['Description'],
       metatagThumbnail: map['Thumbnail'],
-      metatagKeywords: map['Keywords'].cast<String>(),
+      metatagKeywords: [map['Keywords']],
       contentTag: map['ContentTag'],
       aboReadOnly: map['AboReadOnly'],
       allowShare: map['AllowShare'],
-      metatagAllowidentities: map['Allowidentities']?.cast<String>(),
-      metatagPublishdate: map['Publishdate'],
-      videoPoster: map['videoPoster']?.cast<String>(),
-      videoPath: map['videoPath']?.cast<String>(),
-      videolength: map['videoLen'],
+      metatagAllowidentities: [map['AllowIdentities']],
+      metatagPublishdate: map['PublishDate'],
+      videoPoster: [map['VideoPoster']],
+      videoPath: [map['VideoPath']],
+      videolength: map['VideoLength'],
     );
   }
 
@@ -99,14 +96,17 @@ class VideoArticleModel extends ArticleModel {
         'Url': url,
         'Description': description,
         'Thumbnail': metatagThumbnail,
-        'Keywords': metatagKeywords.toString(),
+        'Keywords': keywords,
         'ContentTag': contentTag,
         'AboReadOnly': aboReadOnly,
         'AllowShare': allowShare,
-        'Allowidentities': metatagAllowidentities,
-        'Publishdate': metatagPublishdate,
-        'VideoPoster': videoPoster,
-        'VideoPath': videoPath,
+        'Allowidentities': allowIdentities,
+        'PublishDate': metatagPublishdate,
+        'VideoPoster': videoPosters,
+        'VideoPath': videoPaths,
         'Videolength': videolength,
       };
+
+  String get videoPaths => videoPath != null && videoPath.isNotEmpty ? videoPath.first : null;
+  String get videoPosters => videoPoster != null && videoPoster.isNotEmpty ? videoPoster.first : null;
 }

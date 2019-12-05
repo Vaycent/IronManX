@@ -13,8 +13,10 @@ import '../providers/solr_query_parameters.dart';
 import '../providers/sqlite_data_provider.dart';
 
 class ContentRepository {
+  static const ArticleFilterQuery = '((metatag.thumbnail:* || productImageUrl:*) && -noSearch:1 && -metatag.keywords:Q&A)';
   static const ArticleQueryfiledList =
       'id,host,url,title,metatag.searchtitle,description,aboReadOnly,metatag.keywords,metatag.thumbnail,metatag.allowidentities,allowShare,promotion,contentTag,metatag.publishdate,productImageUrl,strippedContent,videoPoster,videoPath,videoLen';
+  static const ImageFilterQuery = '';
   static const ImageQueryfiledList =
       'id,host,url,title,metatag.keywords,metatag.publishdate,strippedContent,photoPath,link,productId,productType,linkType,alignmentStyle,qrcodeProducts,photoType';
 
@@ -61,7 +63,7 @@ class ContentRepository {
     var parameters = SolrQueryParameters(
       sort: 'metatag.publishdate desc',
       rows: 1,
-      filterQuery: '((metatag.thumbnail:* || productImageUrl:*) && -noSearch:1)',
+      filterQuery: ArticleFilterQuery,
     );
 
     final numberFound = await _articleDataProvider.SearchNumberFound(parameters);
@@ -127,7 +129,7 @@ class ContentRepository {
     var parameters = SolrQueryParameters(
       sort: 'metatag.publishdate desc',
       rows: 1,
-      filterQuery: '((metatag.thumbnail:* || productImageUrl:*) && -noSearch:1 && metatag.publishdate:[$from TO *])',
+      filterQuery: '$ArticleFilterQuery && metatag.publishdate:[$from TO *])',
     );
 
     final numberFound = await _articleDataProvider.SearchNumberFound(parameters);

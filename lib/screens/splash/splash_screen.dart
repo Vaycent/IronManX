@@ -5,6 +5,7 @@ import '../../repositories/content_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../screen_routes.dart';
 import 'splash_screen_bloc.dart';
 import 'splash_screen_events.dart';
 import 'splash_screen_states.dart';
@@ -13,11 +14,13 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      builder: (context) => SplashScreenBloc(RepositoryProvider.of<ContentRepository>(context))..add(Initialise()),
+      create: (context) => SplashScreenBloc(RepositoryProvider.of<ContentRepository>(context))..add(Initialise()),
       child: BlocListener<SplashScreenBloc, SplashScreenState>(
         listener: (context, state) {
           if (state is Initialised) {
-            // TODO:navigate to homepage
+            if (state.shouldPresentOnboardingScreen) {
+              Navigator.pushNamedAndRemoveUntil(context, ScreenRoutes.Onboarding, (route) => route == null);
+            }
           }
         },
         child: Container(

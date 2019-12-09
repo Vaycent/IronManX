@@ -8,6 +8,7 @@ abstract class ContentModelBase extends Equatable {
   final String host;
   final String url;
   final List<String> metatagKeywords;
+  final String metatagPublishdate;
 
   ContentModelBase({
     this.id,
@@ -17,7 +18,12 @@ abstract class ContentModelBase extends Equatable {
     this.host,
     this.url,
     this.metatagKeywords,
+    this.metatagPublishdate,
   });
+
+  List<String> splitToList(String source) => source != null ? source.split(',') : null;
+
+  String get keywords => metatagKeywords != null && metatagKeywords.isNotEmpty ? metatagKeywords.first : null;
 
   Map<String, dynamic> toMap();
   Map<String, dynamic> toDbMap();

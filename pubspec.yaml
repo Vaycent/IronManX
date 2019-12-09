@@ -11,7 +11,7 @@ description: Amway News Mobile App.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.191118+1
+version: 1.0.0+191209
 
 # https://github.com/dart-lang/sdk/blob/master/CHANGELOG.md
 environment:

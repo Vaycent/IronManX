@@ -3,7 +3,7 @@ apply from: "config.gradle"
 buildscript {
     ext.kotlin_version = '1.3.61'
     repositories {
-        maven {url "http://10.158.194.179:32768/repository/android_all/"}
+        maven {url "http://nexus-cn.intranet.local/repository/amway-android-all/"}
         maven{ url "https://maven.aliyun.com/repository/google" }
         maven{ url "https://maven.aliyun.com/repository/jcenter" }
 //        google()
@@ -18,7 +18,7 @@ buildscript {
 
 allprojects {
     repositories {
-        maven {url "http://10.158.194.179:32768/repository/android_all/"}
+        maven {url "http://nexus-cn.intranet.local/repository/amway-android-all/"}
         maven{ url "https://maven.aliyun.com/repository/google" }
         maven{ url "https://maven.aliyun.com/repository/jcenter" }
 //        google()

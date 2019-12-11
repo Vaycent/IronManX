@@ -1,3 +1,6 @@
+import 'package:package_info/package_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../models/image_model.dart';
 
 import '../../models/article_model.dart';
@@ -5,6 +8,7 @@ import '../../models/article_model.dart';
 import '../../repositories/content_repository.dart';
 import 'package:bloc/bloc.dart';
 
+import '../../shared_preference_keys.dart';
 import 'splash_screen_events.dart';
 import 'splash_screen_states.dart';
 
@@ -54,7 +58,13 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
 
         print('Splash Screen Initilaised...');
         yield Initialising(progress: 100);
-        // yield Initialised();
+
+        final prefs = await SharedPreferences.getInstance();
+        final packageInfo = await PackageInfo.fromPlatform();
+        final versionCode = packageInfo.buildNumber;
+        yield Initialised(
+          shouldPresentLoginScreen: prefs.getString(SharedPreferenceKeys.shouldPresentOnboardingScreen) != versionCode,
+        );
       } catch (ex) {
         print(ex);
         yield NetworkError();

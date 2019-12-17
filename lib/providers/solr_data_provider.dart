@@ -4,7 +4,6 @@
 import 'package:dio/dio.dart';
 
 import '../models/solr/solr_result.dart';
-import 'solr_data_response.dart';
 import 'solr_query_parameters.dart';
 
 class SolrDataProvider {
@@ -21,7 +20,7 @@ class SolrDataProvider {
     ));
   }
 
-  Future<SolrResult> Search(SolrQueryParameters parameters) async {
+  Future<SolrResult> search(SolrQueryParameters parameters) async {
     var response = await restClient.get(
       '/select',
       queryParameters: parameters.toMap(),
@@ -36,7 +35,7 @@ class SolrDataProvider {
     return null;
   }
 
-  Future<int> SearchNumberFound(SolrQueryParameters parameters) async {
+  Future<int> searchNumberFound(SolrQueryParameters parameters) async {
     try {
       final response = await restClient.get(
         '/select',

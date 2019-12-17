@@ -13,8 +13,8 @@ class Global {
   static const Color AmwayDeepOrange = Color(0xFFA76C47);
   static const Color AmwayLightOrange = Color(0xFFFFF1E8);
 
-  static const Color AmwayDeepBlue = Color(0xFF38539A);
-  static const Color AmwayLightBlue = Color(0xFFF1F2FF);
+  static const Color AmwayDeepBlue = Color(0xFF396E75);
+  static const Color AmwayLightBlue = Color(0xFFE5FDFF);
 
   static const Color AmwayDeepGreen = Color(0xFF73793B);
   static const Color AmwayLightGreen = Color(0xFFF0FAE5);

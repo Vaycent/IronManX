@@ -20,7 +20,7 @@ class ArticleModel extends ContentModelBase {
     String host,
     String url,
     List<String> metatagKeywords,
-    String metatagPublishdate,
+    String metatagPublishDate,
     // this.metatagSearchtitle,
     this.description,
     this.metatagThumbnail,
@@ -36,7 +36,7 @@ class ArticleModel extends ContentModelBase {
           host: host,
           url: url,
           metatagKeywords: metatagKeywords,
-          metatagPublishdate: metatagPublishdate,
+          metatagPublishDate: metatagPublishDate,
         );
 
   @override
@@ -58,7 +58,7 @@ class ArticleModel extends ContentModelBase {
       aboReadOnly: map['aboReadOnly'],
       allowShare: map['allowShare'],
       metatagAllowidentities: map['metatag.allowidentities']?.cast<String>(),
-      metatagPublishdate: map['metatag.publishdate'],
+      metatagPublishDate: map['metatag.publishdate'],
     );
   }
 
@@ -77,7 +77,7 @@ class ArticleModel extends ContentModelBase {
       aboReadOnly: map['AboReadOnly'],
       allowShare: map['AllowShare'],
       metatagAllowidentities: [map['AllowIdentities']],
-      metatagPublishdate: map['PublishDate'],
+      metatagPublishDate: map['PublishDate'],
     );
   }
 
@@ -96,7 +96,7 @@ class ArticleModel extends ContentModelBase {
         'aboReadOnly': aboReadOnly,
         'allowShare': allowShare,
         'metatag.allowidentities': metatagAllowidentities,
-        'metatag.publishdate': metatagPublishdate,
+        'metatag.publishdate': metatagPublishDate,
       };
 
   @override
@@ -114,7 +114,7 @@ class ArticleModel extends ContentModelBase {
         'AboReadOnly': aboReadOnly,
         'AllowShare': allowShare,
         'AllowIdentities': allowIdentities,
-        'PublishDate': metatagPublishdate,
+        'PublishDate': metatagPublishDate,
       };
 
   String get allowIdentities => metatagAllowidentities != null && metatagAllowidentities.isNotEmpty ? metatagAllowidentities.first : null;

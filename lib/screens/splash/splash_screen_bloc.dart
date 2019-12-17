@@ -1,13 +1,10 @@
+import 'package:bloc/bloc.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../models/image_model.dart';
-
 import '../../models/article_model.dart';
-
+import '../../models/image_model.dart';
 import '../../repositories/content_repository.dart';
-import 'package:bloc/bloc.dart';
-
 import '../../shared_preference_keys.dart';
 import 'splash_screen_events.dart';
 import 'splash_screen_states.dart';
@@ -27,6 +24,8 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
         var latestDateTime = await _contentRepository.maxValue(ArticleModel.TableName, 'PublishDate');
         List<ArticleModel> articles;
 
+        print('MaxArticleDate: $latestDateTime');
+
         if (latestDateTime == null) {
           yield Initialising(progress: 0);
           articles = await _contentRepository.getAllArticleContentFromSolr();
@@ -43,6 +42,8 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
         latestDateTime = await _contentRepository.maxValue(ImageModel.TableName, 'PublishDate');
         List<ImageModel> images;
 
+        print('MaxImageDate: $latestDateTime');
+
         if (latestDateTime == null) {
           yield Initialising(progress: 65);
           images = await _contentRepository.getAllImageContentFromSolr();
@@ -56,7 +57,7 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
           yield Initialising(progress: 90);
         }
 
-        print('Splash Screen Initilaised...');
+        print('SplashScreenBloc.Initilaised...');
         yield Initialising(progress: 100);
 
         final prefs = await SharedPreferences.getInstance();

@@ -23,6 +23,9 @@ class SqliteDataProvider {
       final existsDirectory = await directory.exists();
       if (!existsDirectory) {
         await Directory(dirname(path)).create(recursive: true);
+      }
+      final existsFile = await File(path).exists();
+      if (!existsFile) {
         var data = await rootBundle.load(join('assets', 'files', 'amway-search.db'));
         var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
         await File(path).writeAsBytes(bytes, flush: true);

@@ -16,7 +16,7 @@ class ContentRepository {
   static const ArticleFilterQuery = '(metatag.thumbnail:* || productImageUrl:*) && -noSearch:1 && -metatag.keywords:Q&A';
   static const ArticleQueryfiledList =
       'id,host,url,title,metatag.searchtitle,description,aboReadOnly,metatag.keywords,metatag.thumbnail,metatag.allowidentities,allowShare,promotion,contentTag,metatag.publishdate,productImageUrl,strippedContent,videoPoster,videoPath,videoLen';
-  static const ImageFilterQuery = '';
+  static const ImageFilterQuery = 'metatag.keywords:* && metatag.publishdate:*';
   static const ImageQueryfiledList =
       'id,host,url,title,metatag.keywords,metatag.publishdate,strippedContent,photoPath,link,productId,productType,linkType,alignmentStyle,qrcodeProducts,photoType';
 
@@ -26,7 +26,6 @@ class ContentRepository {
 
   Future<String> maxValue(String table, String field) async {
     final db = await _sqliteDataProvider.database;
-    var ff = await db.query(table, columns: [field], orderBy: '$field DESC', limit: 1);
     return firstStringValue(await db.rawQuery('SELECT max($field) FROM $table'));
   }
 
@@ -46,7 +45,7 @@ class ContentRepository {
     final db = await _sqliteDataProvider.database;
     await db.transaction((txn) async {
       var batch = txn.batch();
-      batch.delete(ArticleModel.TableName);
+      // batch.delete(ArticleModel.TableName);
       articles.forEach((m) => batch.insert(ArticleModel.TableName, m.toDbMap()));
       await batch.commit(noResult: true);
     });
@@ -88,19 +87,61 @@ class ContentRepository {
     return null;
   }
 
-  Future<List<ImageModel>> getAllImageContentFromSolr() async {
-    print('ContentRepository.getAllImageContentFromSol');
+  removeAllData(List<String> tables) async {
+    print('ContentRepository.RemoveAllData: $tables');
+
+    final db = await _sqliteDataProvider.database;
+    await db.transaction((txn) async {
+      var batch = txn.batch();
+      tables.map((m) => batch.delete(m));
+      await batch.commit(noResult: true);
+    });
+  }
+
+  Stream<List<ArticleModel>> getAllArticleContentFromSolr2() async* {
+    print('ContentRepository.getAllArticleContentFromSolr2');
 
     var parameters = SolrQueryParameters(
       sort: 'metatag.publishdate desc',
       rows: 1,
-      // filterQuery: '((metatag.thumbnail:* || productImageUrl:*) && -noSearch:1)',
+      filterQuery: ArticleFilterQuery,
+      filedList: ArticleQueryfiledList,
+    );
+
+    final numberFound = await _articleDataProvider.searchNumberFound(parameters);
+
+    if (numberFound > 0) {
+      int start = 0;
+      int rows = 3000;
+
+      parameters.rows = rows;
+
+      do {
+        parameters.start = start;
+        final response = await _articleDataProvider.search(parameters);
+        if (response.responseHeader?.status == 0 && response.response?.docs != null && response.response.docs.length > 0) {
+          yield response.response.docs.map((m) => _createArticleContentModel(m)).toList();
+          start += rows;
+        }
+      } while (start < numberFound);
+    }
+
+    yield null;
+  }
+
+  Future<List<ImageModel>> getAllImageContentFromSolr() async {
+    print('ContentRepository.getAllImageContentFromSolr');
+
+    var parameters = SolrQueryParameters(
+      sort: 'metatag.publishdate desc',
+      rows: 1,
+      filterQuery: ImageFilterQuery,
+      filedList: ImageQueryfiledList,
     );
 
     final numberFound = await _imageDataProvider.searchNumberFound(parameters);
 
     if (numberFound > 0) {
-      parameters.filedList = ImageQueryfiledList;
       parameters.rows = numberFound;
       final response = await _imageDataProvider.search(parameters);
 
@@ -118,7 +159,8 @@ class ContentRepository {
     var parameters = SolrQueryParameters(
       sort: 'metatag.publishdate desc',
       rows: 1,
-      filterQuery: 'metatag.publishdate:{$from TO *]',
+      filterQuery: '$ImageFilterQuery && metatag.publishdate:{$from TO *]',
+      filedList: ImageQueryfiledList,
     );
 
     final numberFound = await _imageDataProvider.searchNumberFound(parameters);

@@ -11,27 +11,32 @@ class SqliteDataProvider {
     if (_database == null) {
       _database = await initDb();
     }
-    print(_database.path);
+    print(_database?.path);
     return _database;
   }
 
   initDb() async {
-    var databasesPath = await getDatabasesPath();
-    var path = join(databasesPath, "amway-search-v1.db");
-
-    if (await Directory(dirname(path)).exists()) {
-      try {
+    final databasesPath = await getDatabasesPath();
+    final path = join(databasesPath, "amway-search-v1.db");
+    final directory = Directory(dirname(path));
+    try {
+      final existsDirectory = await directory.exists();
+      if (!existsDirectory) {
         await Directory(dirname(path)).create(recursive: true);
+      }
+      final existsFile = await File(path).exists();
+      if (!existsFile) {
         var data = await rootBundle.load(join('assets', 'files', 'amway-search.db'));
         var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
         await File(path).writeAsBytes(bytes, flush: true);
-
-        return await openDatabase(path);
-      } catch (ex) {
-        await _database?.close();
-        print(ex);
       }
+      return await openDatabase(path);
+    } catch (ex) {
+      await _database?.close();
+      print(ex);
     }
+
+    return null;
   }
 
   Future close() async => _database?.close();

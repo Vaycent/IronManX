@@ -10,10 +10,10 @@ import 'repositories/content_repository.dart';
 import 'screens/screen_routes.dart';
 
 void main() {
+  runApp(ContentApp());
   if (Platform.isAndroid) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   }
-  runApp(ContentApp());
 }
 
 class ContentApp extends StatelessWidget {
@@ -22,7 +22,7 @@ class ContentApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<ContentRepository>(
-          builder: (context) => ContentRepository(),
+          create: (context) => ContentRepository(),
         ),
       ],
       child: MaterialApp(

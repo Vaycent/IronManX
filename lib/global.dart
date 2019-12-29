@@ -1,6 +1,9 @@
 import 'dart:ui';
 
 class Global {
+  static const String VersionName = '1.0.0';
+  static const String VersionCode = 'dev';
+
   static const Color AmwayBlack = Color(0xFF2C2C2C);
   static const Color AmwayWhite = Color(0xFFFAFAFA);
 
@@ -13,8 +16,8 @@ class Global {
   static const Color AmwayDeepOrange = Color(0xFFA76C47);
   static const Color AmwayLightOrange = Color(0xFFFFF1E8);
 
-  static const Color AmwayDeepBlue = Color(0xFF38539A);
-  static const Color AmwayLightBlue = Color(0xFFF1F2FF);
+  static const Color AmwayDeepBlue = Color(0xFF396E75);
+  static const Color AmwayLightBlue = Color(0xFFE5FDFF);
 
   static const Color AmwayDeepGreen = Color(0xFF73793B);
   static const Color AmwayLightGreen = Color(0xFFF0FAE5);

@@ -4,5 +4,41 @@
         "title": "ANNIE",
         "semanticsLabel": "Amway Logo",
         "firstLaunch": "Initialising, please wait..."
+    },
+    "onboarding": {
+        "screen-1": {
+            "title": "健康生活",
+            "summary": "打造积极向上、自由平衡的生活方式，为人们带来身心灵的全面健康。",
+            "image": "assets/images/ABu_AmwSocial_935.72dpi.jpg"
+        },
+        "1": {
+            "title": "健康生活",
+            "summary": "打造积极向上、自由平衡的生活方式，为人们带来身心灵的全面健康。",
+            "image": "assets/images/ABu_AmwSocial_935.72dpi.jpg"
+        },
+        "2": {
+            "title": "持续成长",
+            "summary": "提供经验支持和专业培训，铺就持续学习、终生成长的道路。",
+            "image": "assets/images/Amw_HealthyLiving7.72dpi.jpg"
+        },
+        "3": {
+            "title": "回报与奖励",
+            "summary": "不断提升个人能力和物质收入，让多劳者多得，努力就有回报。",
+            "image": "assets/images/iCo_Lifestyle_2903.72dpi.jpg"
+        },
+        "4": {
+            "title": "真诚的伙伴关系",
+            "summary": "来自全球的安利创客互相鼓励、互相支持。",
+            "image": "assets/images/Uni_Amw_Social_0020.72dpi.jpg"
+        },
+        "enter": "Enter",
+        "skip": "Skip"
+    },
+    "termsConditions": {
+        "title": "Terms & Conditions",
+        "summary": "Amway is committed to protecting the privacy and security of your personal information. Please review below terms and conditions.",
+        "accept": "I Accept",
+        "acceptTerms": "By tapping I Accept, you accept the Terms.",
+        "acceptUpdatedTerms": "By tapping I Accept, you accept the updated Terms."
     }
 }

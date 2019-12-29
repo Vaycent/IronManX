@@ -6,6 +6,11 @@
         "firstLaunch": "首次启动初始化，请稍后"
     },
     "onboarding": {
+        "screen-1": {
+            "title": "健康生活",
+            "summary": "打造积极向上、自由平衡的生活方式，为人们带来身心灵的全面健康。",
+            "image": "assets/images/ABu_AmwSocial_935.72dpi.jpg"
+        },
         "1": {
             "title": "健康生活",
             "summary": "打造积极向上、自由平衡的生活方式，为人们带来身心灵的全面健康。",
@@ -28,5 +33,12 @@
         },
         "enter": "进入",
         "skip": "跳过"
+    },
+    "termsConditions": {
+        "title": "了解我们的隐私政策与服务条款",
+        "summary": "为了保障您的隐私权益，请务必仔细阅读以下隐私政策与服务条款。",
+        "accept": "我接受",
+        "acceptTerms": "点击「我接受」表示您已熟知并同意接受以上条款。",
+        "acceptUpdatedTerms": "点击「我接受」表示您已熟知并同意接受以上修订条款。"
     }
 }

@@ -14,7 +14,7 @@ class ImageModel extends ContentModelBase {
     String host,
     String url,
     List<String> metatagKeywords,
-    String metatagPublishdate,
+    String metatagPublishDate,
     this.photoPath,
   }) : super(
           id: id,
@@ -24,6 +24,7 @@ class ImageModel extends ContentModelBase {
           host: host,
           url: url,
           metatagKeywords: metatagKeywords,
+          metatagPublishDate: metatagPublishDate,
         );
 
   factory ImageModel.fromMap(Map<String, dynamic> map) {
@@ -35,7 +36,7 @@ class ImageModel extends ContentModelBase {
       host: map['host'],
       url: map['url'],
       metatagKeywords: map['metatag.keywords'].cast<String>(),
-      metatagPublishdate: map['metatag.publishdate'],
+      metatagPublishDate: map['metatag.publishdate'],
       photoPath: map['photoPath'],
     );
   }
@@ -49,7 +50,7 @@ class ImageModel extends ContentModelBase {
       host: map['Host'],
       url: map['Url'],
       metatagKeywords: [map['Keywords']],
-      metatagPublishdate: map['PublishDate'],
+      metatagPublishDate: map['PublishDate'],
       photoPath: map['PhotoPath'],
     );
   }
@@ -66,7 +67,7 @@ class ImageModel extends ContentModelBase {
         'host': host,
         'url': url,
         'metatag.keywords': metatagKeywords,
-        'metatag.publishdate': metatagPublishdate,
+        'metatag.publishdate': metatagPublishDate,
         'photoPath': photoPath,
       };
 
@@ -79,7 +80,7 @@ class ImageModel extends ContentModelBase {
         'Host': host,
         'Url': url,
         'Keywords': keywords,
-        'PublishDate': metatagPublishdate,
+        'PublishDate': metatagPublishDate,
         'PhotoPath': photoPath,
       };
 }

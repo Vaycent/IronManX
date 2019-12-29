@@ -17,7 +17,7 @@ class ProductArticleModel extends ArticleModel {
     int aboReadOnly,
     int allowShare,
     List<String> metatagAllowidentities,
-    String metatagPublishdate,
+    String metatagPublishDate,
   }) : super(
           id: id,
           title: title,
@@ -32,7 +32,7 @@ class ProductArticleModel extends ArticleModel {
           aboReadOnly: aboReadOnly,
           allowShare: allowShare,
           metatagAllowidentities: metatagAllowidentities,
-          metatagPublishdate: metatagPublishdate,
+          metatagPublishDate: metatagPublishDate,
         );
 
   factory ProductArticleModel.fromMap(Map<String, dynamic> map) {
@@ -50,7 +50,7 @@ class ProductArticleModel extends ArticleModel {
       aboReadOnly: map['aboReadOnly'],
       allowShare: map['allowShare'],
       metatagAllowidentities: map['metatag.allowidentities']?.cast<String>(),
-      metatagPublishdate: map['metatag.publishdate'],
+      metatagPublishDate: map['metatag.publishdate'],
     );
   }
 
@@ -69,7 +69,7 @@ class ProductArticleModel extends ArticleModel {
       aboReadOnly: map['AboReadOnly'],
       allowShare: map['AllowShare'],
       metatagAllowidentities: [map['Allowidentities']],
-      metatagPublishdate: map['PublishDate'],
+      metatagPublishDate: map['PublishDate'],
     );
   }
 }

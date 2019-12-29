@@ -1,6 +1,9 @@
 import 'dart:ui';
 
 class Global {
+  static const String VersionName = '1.0.0';
+  static const String VersionCode = 'dev';
+
   static const Color AmwayBlack = Color(0xFF2C2C2C);
   static const Color AmwayWhite = Color(0xFFFAFAFA);
 

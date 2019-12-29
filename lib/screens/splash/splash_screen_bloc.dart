@@ -28,15 +28,21 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
 
         if (latestDateTime == null) {
           yield Initialising(progress: 0);
-          articles = await _contentRepository.getAllArticleContentFromSolr();
+          // var ff = await _contentRepository.getAllArticleContentFromSolr2();
+          // await _contentRepository.fetchAndSaveAllArticleContent();
+          await for (var articles in _contentRepository.getAllArticleContentFromSolr2()) {
+            if (articles == null) {
+              break;
+            }
+            await _contentRepository.saveAllArticleContentToDatabase(articles);
+          }
         } else {
-          yield Initialising(progress: 25);
-          articles = await _contentRepository.getUpdateArticleContentFromSolr(latestDateTime);
-        }
-
-        if (articles != null) {
-          await _contentRepository.saveAllArticleContentToDatabase(articles);
-          yield Initialising(progress: 50);
+          // yield Initialising(progress: 25);
+          final articles = await _contentRepository.getUpdateArticleContentFromSolr(latestDateTime);
+          if (articles != null) {
+            await _contentRepository.saveAllArticleContentToDatabase(articles);
+            yield Initialising(progress: 50);
+          }
         }
 
         latestDateTime = await _contentRepository.maxValue(ImageModel.TableName, 'PublishDate');
